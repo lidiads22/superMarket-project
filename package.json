@@ -1,16 +1,31 @@
 {
-  "name": "swe_project",
-  "version": "1.0.0",
+  "author": "",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.18.2",
+    "firebase": "^10.9.0",
+    "firebase-admin": "^12.0.0",
+    "nodemon": "^3.1.0"
+  },
   "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "nodemon index.js"
+  "devDependencies": {
+    "@babel/cli": "^7.24.1",
+    "@babel/core": "^7.24.1",
+    "@babel/preset-env": "^7.24.1",
+    "mime": "^4.0.1",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4"
   },
   "keywords": [],
-  "author": "",
   "license": "ISC",
-  "dependencies": {
-    "express": "^4.18.2",
-    "mongoose": "^8.2.0"
-  }
+  "main": "index.js",
+  "name": "swe_project",
+  "scripts": {
+    "babel": "babel src -d dist ",
+    "start": "nodemon index.js"
+  },
+  "type": "module",
+  "presets": [
+    "@babel/preset-env"
+  ]
 }
