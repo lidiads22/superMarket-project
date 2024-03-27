@@ -14,5 +14,9 @@
     <orderEntry type="library" name="jquery" level="application" />
     <orderEntry type="library" name="firebase-auth" level="application" />
     <orderEntry type="library" name="bootstrap-icons" level="application" />
+    <orderEntry type="library" name="firebase-firestore" level="application" />
+    <orderEntry type="library" name="firebase-app-compat" level="application" />
+    <orderEntry type="library" name="firebase-auth-compat" level="application" />
+    <orderEntry type="library" name="firebase-firestore-compat" level="application" />
   </component>
 </module>
