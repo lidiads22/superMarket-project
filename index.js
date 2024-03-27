@@ -19,19 +19,20 @@ app.use('/js', express.static('js'));
 // Serve static files from the "css" folder
 app.use('/css', express.static('css'));
 
-// Serve index.html
-app.get(['/', '/index.html'], (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
-});
 
-// Serve login.html
-app.get('/login.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'login.html'));
+// Serve index.html
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 // Serve signUp.html
 app.get('/signUp.html', (req, res) => {
     res.sendFile(path.join(__dirname, 'signUp.html'));
+});
+
+// Serve home.html
+app.get('/home.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'home.html'));
 });
 
 // Serve cart.html

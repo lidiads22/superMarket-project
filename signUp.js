@@ -1,18 +1,8 @@
     // ClIENT-SIDE javascript
-    // listen for submit
-    // Firebase initialization code
-    // check the email is valid, using regular expression
-    //import firebase from "firebase/compat/app";
-    // Assuming Firebase has been initialized in another file
-
-
-
-
     function isEmailValid(email) {
         const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         return regex.test(email);
     }
-
 
     // Checks if password is secure using regex
     const isPasswordSecure = (password) => {
@@ -37,7 +27,17 @@
                             password: password, // Reminder: Store passwords securely
                         });
                         console.log("User added successfully");
-                        // Actions on successful submission (e.g., redirect, show success message)
+                        // On successful submission (e.g., redirect, show success message)
+                        const cartid = db.collection("users").doc(email).collection("cart").doc().id;
+                        await db.collection("users").doc(email).collection("cart").doc(cartid).set({
+                            cartItems:[],
+                            order:[]
+                        });
+                       // cart.log("Cart initialized for new user");
+
+                        // On successful submission
+                        alert("Signup successful!");
+                        window.location.href = 'home.html';
                     } catch (error) {
                         console.error("Error adding user: ", error);
                         // Handle the error (show error message)
