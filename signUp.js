@@ -11,31 +11,30 @@
     };
 
     document.addEventListener('DOMContentLoaded', function() {
-        console.log('DOM fully loaded');
         const form = document.getElementById('signup-form');
         if (form) {
             form.addEventListener('submit', async event => {
                 event.preventDefault();
-
+    
                 const email = document.getElementById('email').value;
                 const password = document.getElementById('password').value;
-
-                if(isEmailValid(email) && isPasswordSecure(password)) {
+    
+                if (isEmailValid(email) && isPasswordSecure(password)) {
                     try {
+                        // Create the user account
                         await db.collection("users").doc(email).set({
                             email: email,
-                            password: password, // Reminder: Store passwords securely
+                            password: password, // Reminder: Storing passwords in plaintext is insecure, consider using authentication mechanisms
                         });
                         console.log("User added successfully");
-                        // On successful submission (e.g., redirect, show success message)
-                        const cartid = db.collection("users").doc(email).collection("cart").doc().id;
-                        await db.collection("users").doc(email).collection("cart").doc(cartid).set({
-                            cartItems:[],
-                            order:[]
+    
+                        // Initialize user-related data (e.g., an empty cart) here if necessary
+                        // Example: Creating an empty cart for the user
+                        await db.collection("users").doc(email).collection("cart").doc("cartId").set({
+                            cartItems: [],
+                            order: []
                         });
-                       // cart.log("Cart initialized for new user");
-
-                        // On successful submission
+    
                         alert("Signup successful!");
                         window.location.href = 'home.html';
                     } catch (error) {
@@ -45,10 +44,9 @@
                 } else {
                     console.log("Validation failed", password);
                     // Handle validation failure (show validation error)
-
                 }
             });
         } else {
             console.log('signup-form not found');
         }
-    });
+    });    

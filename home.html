@@ -12,10 +12,11 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
   <!-- Core theme CSS (includes Bootstrap)-->
   <link href="css/styles.css" rel="stylesheet" />
-
+  <link href="cart.css" rel="stylesheet" />
   <!-- Include your custom script -->
   <script src="signUp.js" defer></script>
   <script src="cart.html" defer></script>
+  <script src="cart.js" defer></script>
   <!-- Include the compatibility layer for Firebase v9 SDKs -->
 
 </head>
@@ -47,15 +48,16 @@
           </ul>
         </li>
       </ul>
+      <!-- Navigation and other content -->
+    <div>
       <form class="d-flex">
-        <button class="btn btn-outline-dark" type="submit">
-          <i class="bi-cart-fill me-1"></i>
-          Cart
-          <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-        </button>
+          <button class="btn btn-outline-dark" type="button" id="cartToggle" >
+            <i class="bi-cart-fill me-1"></i>
+            Cart
+            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+          </button>
       </form>
     </div>
-  </div>
 </nav>
 
 <!-- Header-->
@@ -83,11 +85,14 @@
             </div>
           </div>
           <!-- Product actions-->
-          <div class="text-center">
-            <button class="btn btn-outline-dark mt-auto" onclick="handleAddToCartClick(event)" data-itemid="fresh-broccoli" data-quantity="1">
+          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent text-center">
+            <button class="btn btn-outline-dark mt-auto" onclick="handleAddToCartClick(event)" data-itemid="broccoli_ID" data-quantity="1">
               Add to cart
             </button>
+          
           </div>
+
+
 
         </div>
       </div>
@@ -96,7 +101,7 @@
           <!-- Sale badge-->
           <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
           <!-- Product image-->
-          <img class="card-img-top" src="assets/tomatoes.jpg" alt="..." />
+          <img class="card-img-top" src="assets/tomatoes.jpg" alt="Tomatoes" />
           <!-- Product details-->
           <div class="card-body p-4">
             <div class="text-center">
@@ -115,9 +120,12 @@
             </div>
           </div>
           <!-- Product actions-->
-          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent text-center" >
+            <button class="btn btn-outline-dark  mt-auto text-center " onclick="handleAddToCartClick(event)" data-itemid="tomatoes_ID" data-quantity="1" >
+              Add to cart
+            </button>
           </div>
+
         </div>
       </div>
       <div class="col mb-5">
@@ -136,8 +144,10 @@
             </div>
           </div>
           <!-- Product actions-->
-          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent text-center" >
+            <button class="btn btn-outline-dark  mt-auto text-center " onclick="handleAddToCartClick(event)" data-itemid="potato_ID" data-quantity="1" >
+              Add to cart
+            </button>
           </div>
         </div>
       </div>
@@ -163,8 +173,10 @@
             </div>
           </div>
           <!-- Product actions-->
-          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent text-center" >
+            <button class="btn btn-outline-dark  mt-auto text-center " onclick="handleAddToCartClick(event)" data-itemid="bellPep_ID" data-quantity="1" >
+              Add to cart
+            </button>
           </div>
         </div>
       </div>
@@ -173,7 +185,7 @@
           <!-- Sale badge-->
           <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
           <!-- Product image-->
-          <img class="card-img-top" src="assets/strawberry.jpg" alt="..." />
+          <img class="card-img-top" src="assets/strawberry.jpg" alt="Strawberries" />
           <!-- Product details-->
           <div class="card-body p-4">
             <div class="text-center">
@@ -184,11 +196,15 @@
             </div>
           </div>
           <!-- Product actions-->
-          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent text-center">
+            <button class="btn btn-outline-dark mt-auto" onclick="handleAddToCartClick(event)" data-itemid="strawberry_ID" data-quantity="1">
+              Add to cart
+            </button>
           </div>
         </div>
       </div>
+
+
       <div class="col mb-5">
         <div class="card h-100">
           <!-- Product image-->
@@ -203,8 +219,10 @@
             </div>
           </div>
           <!-- Product actions-->
-          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent text-center" >
+            <button class="btn btn-outline-dark  mt-auto text-center " onclick="handleAddToCartClick(event)" data-itemid="banana_ID" data-quantity="1" >
+              Add to cart
+            </button>
           </div>
         </div>
       </div>
@@ -232,8 +250,10 @@
             </div>
           </div>
           <!-- Product actions-->
-          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent text-center" >
+            <button class="btn btn-outline-dark  mt-auto text-center " onclick="handleAddToCartClick(event)" data-itemid="oranges_ID" data-quantity="1" >
+              Add to cart
+            </button>
           </div>
         </div>
       </div>
@@ -259,8 +279,10 @@
             </div>
           </div>
           <!-- Product actions-->
-          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent text-center" >
+            <button class="btn btn-outline-dark  mt-auto text-center " onclick="handleAddToCartClick(event)" data-itemid="grapes_ID" data-quantity="1" >
+              Add to cart
+            </button>
           </div>
         </div>
       </div>

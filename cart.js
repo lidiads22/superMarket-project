@@ -62,3 +62,55 @@ function handleAddToCartClick(event) {
         // Handle the error appropriately
     });
 }
+
+
+async function displayCart(userEmail) {
+    const db = firebase.firestore();
+    const userCartDocRef = db.collection("users").doc(userEmail).collection("cart").doc("cartId");
+
+    try {
+        const doc = await userCartDocRef.get();
+        if (doc.exists) {
+            const cartItems = doc.data().cartItems || [];
+            const cartItemListElement = document.getElementById('cartItemList');
+            cartItemListElement.innerHTML = ''; // Clear current list
+            let total = 0;
+
+            cartItems.forEach(item => {
+                // For each item, append details to cartItemListElement. Assumes you have item details like name and price.
+                const itemElement = document.createElement('div');
+                itemElement.textContent = `Item: ${item.itemID}, Quantity: ${item.quantity}`;
+                cartItemListElement.appendChild(itemElement);
+
+                // Update total - assuming you have a way to get the price of each item
+                total += (item.quantity * getPriceById(item.itemID)); // Implement this function based on your application
+            });
+
+            document.getElementById('cartTotal').textContent = total.toFixed(2);
+        } else {
+            console.log("No cart found for user.");
+        }
+    } catch (error) {
+        console.error("Error fetching cart: ", error);
+    }
+}
+addItemToCart(userEmail, itemID, quantity).then(() => {
+    console.log("Item added to cart");
+    // Update the cart display
+    displayCart(userEmail);
+}).catch(error => {
+    console.error("Could not add item to cart", error);
+    // Handle the error appropriately
+});
+
+
+  document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('cartToggle').addEventListener('click', function() {
+          const cartSidebar = document.getElementById('cartSidebar');
+          if (cartSidebar) {
+              cartSidebar.classList.toggle('open');
+          } else {
+              console.error('Cart sidebar element not found!');
+          }
+      });
+  });
