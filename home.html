@@ -10,6 +10,8 @@
   <link rel="icon" type="image/x-icon" href="assets/46271.jpg" />
   <!-- Bootstrap icons-->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+
   <!-- Core theme CSS (includes Bootstrap)-->
   <link href="css/styles.css" rel="stylesheet" />
   <link href="cart.css" rel="stylesheet" />
@@ -55,12 +57,21 @@
       </form>
     </div>
 </nav>
-
 <!-- Header-->
 <header class="bg-dark py-5">
   <!-- Adding an image -->
   <img src="assets/7053285.jpg"  class="img-fluid">
 </header>
+
+<!-- Discount-->
+<div id="discountPopup" class="popup-overlay">
+  <div class="popup-content">
+    <h2>Special Discount Just for You!</h2>
+    <p>Use the code <strong>GROCERY20</strong> at checkout to get 20% off your next purchase.</p>
+    <button onclick="closePopup()">Close</button>
+  </div>
+</div>
+
 
 
 <!-- Section VEGETABLES-->
@@ -85,10 +96,7 @@
             <button class="btn btn-outline-dark mt-auto" onclick="handleAddToCartClick(event)" data-itemid="broccoli_ID" data-quantity="1">
               Add to cart
             </button>
-          
           </div>
-
-
 
         </div>
       </div>
@@ -285,7 +293,6 @@
     </div>
   </div>
 
-
 <div class="cartTab"  >
   <h1>Shopping Cart</h1>
 <div class="ListCart">
@@ -326,7 +333,6 @@
 <script>
 // Additional JavaScript for handling cart functionality
 // JavaScript for toggling the cart sidebar
-
 </script>
 </body>
 </html>

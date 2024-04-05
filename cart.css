@@ -56,9 +56,6 @@
     -webkit-user-select: none;
     touch-action: manipulation;
 }
-
-
-
 .cartTab .btn .close{
     background-color: white;
 }
@@ -83,3 +80,104 @@
     color: #eee;
 }
 
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden; /* Hide it by default */
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s linear;
+    z-index: 999; /* Ensure it's above other content */
+  }
+  
+  .popup-content {
+    width: 500px;
+    height: auto; /* Adjust based on content */
+    border-radius: 5px;
+    box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    padding: 20px;
+    position: relative;
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+  
+  .popup-content::after,
+  .popup-content::before {
+    content: "";
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    border-radius: 40px;
+    z-index: 1;
+    top: calc(50% - 20px); /* Center vertically */
+    background-color: #14c04a;
+  }
+  
+  .popup-content::after {
+    right: -20px;
+  }
+  
+  .popup-content::before {
+    left: -20px;
+  }
+  
+  .popup-content h1 {
+    font-size: 35px;
+    color: #565656;
+    margin: 0;
+  }
+  
+  .popup-content h1 span {
+    font-size: 18px;
+  }
+  
+  .popup-content h2 {
+    font-size: 18px;
+    color: #565656;
+    text-transform: uppercase;
+  }
+  
+  .popup-content p {
+    font-size: 16px;
+    color: #696969;
+  }
+  
+  .copy-button {
+  margin: 12px 0 -5px 0;
+  height: 45px;
+  border-radius: 4px;
+  padding: 0 5px;
+  border: 1px solid #29a82f;
+  
+  }
+  
+  .copy-button input {
+    flex: 1;
+    border: none;
+    padding: 10px;
+    font-size: 15px;
+  }
+  
+  .copy-button button {
+    padding: 5px 20px;
+    background-color: #14c04a;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+  }
+  
+  .popup-overlay.show {
+    visibility: visible;
+    opacity: 1;
+  }
+  

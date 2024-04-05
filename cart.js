@@ -142,3 +142,13 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+
+document.addEventListener('DOMContentLoaded', function() {
+  setTimeout(function() {
+    document.getElementById('discountPopup').classList.add('show');
+  }, 2000); // Show popup after 2 seconds for demonstration
+});
+
+function closePopup() {
+  document.getElementById('discountPopup').classList.remove('show');
+}
