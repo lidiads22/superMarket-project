@@ -56,3 +56,41 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('signup-form not found');
     }
 });
+
+// Adding items to Cart
+function addItemToCart(uid, item) {
+    const cartItemRef = db.collection('users').doc(uid).collection('cart').doc(item.itemId);
+
+    cartItemRef.set({
+        name: item.name,
+        price: item.price,
+        quantity: item.quantity,
+        imageUrl: item.imageUrl
+    })
+    .then(() => console.log("Item added to cart successfully"))
+    .catch((error) => console.error("Error adding item to cart: ", error));
+}
+
+// Displaying the Cart
+function displayCart(uid) {
+    const cartRef = db.collection('users').doc(uid).collection('cart');
+    
+    cartRef.get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            const item = doc.data();
+            // Dynamically create HTML for each item
+            // Example:
+            const itemElement = document.createElement('div');
+            itemElement.innerHTML = `
+                <div class="cart-item">
+                    <img src="${item.imageUrl}" alt="${item.name}" />
+                    <p>Produce: ${item.name}</p>
+                    <p>Price: $${item.price}</p>
+                    <p>Quantity: ${item.quantity}</p>
+                </div>
+            `;
+            document.getElementById('cartItemsContainer').appendChild(itemElement);
+        });
+    })
+    .catch((error) => console.error("Error getting cart items: ", error));
+}

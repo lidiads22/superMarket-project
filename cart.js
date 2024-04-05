@@ -1,116 +1,144 @@
 // cart.js
-window.addItemToCart = async function(userEmail, itemID, quantity) {
-    const db = firebase.firestore(); // Access Firestore
-    const userCartDocRef = db.collection("users").doc(userEmail).collection("cart").doc("cartId");
+// Object containing product details
 
-    // Prepare the item object
-    const item = { itemID, quantity };
-
-    try {
-        // Use a transaction to add/update the item in the cartItems array
-        await db.runTransaction(async (transaction) => {
-            const doc = await transaction.get(userCartDocRef);
-            if (!doc.exists) {
-                console.error("Document does not exist!");
-                throw new Error("Document does not exist!");
-            }
-
-            const cartItems = doc.data().cartItems || [];
-            const existingItemIndex = cartItems.findIndex(ci => ci.itemID === itemID);
-
-            if (existingItemIndex !== -1) {
-                // Item exists, update quantity
-                cartItems[existingItemIndex].quantity += quantity;
-            } else {
-                // New item, add to cart
-                cartItems.push(item);
-            }
-
-            // Update the cart document with the new cartItems array
-            transaction.update(userCartDocRef, { cartItems });
-        });
-
-        console.log("Item added to cart successfully");
-    } catch (error) {
-        console.error("Error adding item to cart: ", error);
+const products = {
+    "broccoli_ID": {
+        name: "Fresh Broccoli",
+        price: 2.50,
+        imageUrl: "assets/fresh-broccoli.jpg",
+        quantity: 1 // Default quantity can be 1 to start, or dynamically adjusted
+    },
+    "tomatoes_ID": {
+        name: "Tomatoes",
+        price: 1.50,
+        imageUrl: "assets/tomatoes.jpg",
+        quantity: 1
+    },
+    // Add more products as needed
+    "potato_ID": {
+        name: "Potatoes",
+        price: 2.50,
+        imageUrl: "assets/potato-table.jpg",
+        quantity: 1 // Default quantity can be 1 to start, or dynamically adjusted
+    },
+    "bellPep_ID": {
+        name: "Bell Peppers",
+        price: 1.50,
+        imageUrl: "assets/peppers.jpg",
+        quantity: 1
+    },
+    "strawberry_ID": {
+        name: "Organic Strawberries",
+        price: 2.50,
+        imageUrl: "assets/strawberry.jpg",
+        quantity: 1 // Default quantity can be 1 to start, or dynamically adjusted
+    },
+    "banana_ID": {
+        name: "Organic Bannanas",
+        price: 1.50,
+        imageUrl: "assets/ban.jpg",
+        quantity: 1
+    },
+    "oranges_ID": {
+        name: "Oranges",
+        price: 2.50,
+        imageUrl: "assets/orange.jpg",
+        quantity: 1 // Default quantity can be 1 to start, or dynamically adjusted
+    },
+    "grapes_ID": {
+        name: "Grapes",
+        price: 1.50,
+        imageUrl: "assets/grapes.jpg",
+        quantity: 1
     }
 };
 
-// Assume getCurrentUserEmail is defined somewhere in your project
-// This function retrieves the current user's email from Firebase Auth
-function getCurrentUserEmail() {
-    const user = firebase.auth().currentUser;
-    return user ? user.email : null;
+function handleAddToCartClick(event, uid) {
+    const itemID = event.target.getAttribute('data-itemid');
+    const itemDetails = products[itemID];
+    // Correcting to use UID for Firestore document path
+    const userCartRef = db.collection("users").doc(uid).collection("cart").doc(itemID);
+
+    userCartRef.set(itemDetails)
+        .then(() => console.log("Item added to cart successfully"))
+        .catch(error => console.error("Error adding item to cart: ", error));
 }
 
-function handleAddToCartClick(event) {
-    const button = event.target;
-    const itemID = button.getAttribute('data-itemid');
-    const quantity = parseInt(button.getAttribute('data-quantity'), 10);
-    const userEmail = getCurrentUserEmail();
+// Function to display cart items
+document.addEventListener('DOMContentLoaded', function() {
+    firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+            // User is signed in, attach event listeners or perform actions
+            const uid = user.uid;
+            attachEventListeners(uid);
+        } else {
+            // User is not signed in, handle accordingly
+            console.log("No user is signed in.");
+        }
+    });
+});
 
-    if (!userEmail) {
-        alert("Please log in to add items to your cart.");
-        return;
-    }
-
-    addItemToCart(userEmail, itemID, quantity).then(() => {
-        console.log("Item added to cart");
-        // Optionally, give feedback to the user (like updating a cart icon count)
-    }).catch(error => {
-        console.error("Could not add item to cart", error);
-        // Handle the error appropriately
+function attachEventListeners(uid) {
+    const addToCartButtons = document.querySelectorAll('.btn-outline-dark.mt-auto');
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', function(event) {
+            handleAddToCartClick(event, uid);
+        });
     });
 }
 
+function handleAddToCartClick(event, uid) {
+    const itemID = event.target.getAttribute('data-itemid');
+    const itemDetails = products[itemID];
+    const userCartRef = db.collection("users").doc(uid).collection("cart").doc(itemID);
 
-async function displayCart(userEmail) {
-    const db = firebase.firestore();
-    const userCartDocRef = db.collection("users").doc(userEmail).collection("cart").doc("cartId");
+    userCartRef.set(itemDetails)
+        .then(() => console.log("Item added to cart successfully"))
+        .catch(error => console.error("Error adding item to cart: ", error));
+}
+
+async function displayCart(uid) {
+    const cartRef = db.collection("users").doc(uid).collection("cart");
+    const cartItemListElement = document.getElementById('cartItemsContainer'); // Ensure you have this container in your HTML
 
     try {
-        const doc = await userCartDocRef.get();
-        if (doc.exists) {
-            const cartItems = doc.data().cartItems || [];
-            const cartItemListElement = document.getElementById('cartItemList');
-            cartItemListElement.innerHTML = ''; // Clear current list
-            let total = 0;
-
-            cartItems.forEach(item => {
-                // For each item, append details to cartItemListElement. Assumes you have item details like name and price.
-                const itemElement = document.createElement('div');
-                itemElement.textContent = `Item: ${item.itemID}, Quantity: ${item.quantity}`;
-                cartItemListElement.appendChild(itemElement);
-
-                // Update total - assuming you have a way to get the price of each item
-                total += (item.quantity * getPriceById(item.itemID)); // Implement this function based on your application
-            });
-
-            document.getElementById('cartTotal').textContent = total.toFixed(2);
-        } else {
-            console.log("No cart found for user.");
-        }
+        const querySnapshot = await cartRef.get();
+        cartItemListElement.innerHTML = ''; // Clear the cart items container
+        querySnapshot.forEach((doc) => {
+            const item = doc.data();
+            const itemElement = document.createElement('div');
+            itemElement.innerHTML = `
+                <div class="cart-item">
+                    <img src="${item.imageUrl}" alt="${item.name}" style="width: 100px; height: 100px;" />
+                    <h5>${item.name}</h5>
+                    <p>$${item.price} x ${item.quantity}</p>
+                </div>
+            `;
+            cartItemListElement.appendChild(itemElement); // Append the item element to the cart items container
+        });
     } catch (error) {
-        console.error("Error fetching cart: ", error);
+        console.error("Error fetching cart items:", error);
     }
 }
-addItemToCart(userEmail, itemID, quantity).then(() => {
-    console.log("Item added to cart");
-    // Update the cart display
-    displayCart(userEmail);
-}).catch(error => {
-    console.error("Could not add item to cart", error);
-    // Handle the error appropriately
+
+
+// close button 
+document.addEventListener('DOMContentLoaded', function() {
+    const closeButton = document.getElementById('closeID');
+    const cartTab = document.querySelector('.cartTab');
+    cartTab.style.display = 'none';
+
+    closeButton.addEventListener('click', function() {
+        // Directly modify the style to hide the cart
+        cartTab.style.display = 'none';
+    });
+
+    // Assuming you have an "Open Cart" button with id="cartToggle"
+    const openCartButton = document.getElementById('cartToggle');
+    openCartButton.addEventListener('click', function() {
+        // Directly modify the style to show the cart
+        cartTab.style.display = 'block';
+    });
 });
 
 
-  document.addEventListener('DOMContentLoaded', function() {
-      document.getElementById('cartToggle').addEventListener('click', function() {
-          const cartSidebar = document.getElementById('cartSidebar');
-          if (cartSidebar) {
-              cartSidebar.classList.toggle('open');
-          } else {
-              console.error('Cart sidebar element not found!');
-          }
-      });
-  });

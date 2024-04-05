@@ -1,18 +1,85 @@
-.cartTab{
-    width: 400px;
-    background-color:sandybrown;
+.listProduct .item .price{
+    letter-spacing: 7px;
+    font-size:x-small;
+    font-family: Verdana, Geneva, Tahoma, sans-serifs;
+}
+.listProduct .item button{
+    background-color: rgb(237, 245, 238);
     color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    margin-top: 10px;
+    border: none;
+    cursor: pointer;
+}
+.cartTab {
+    width: 400px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(56, 183, 90);
     position: fixed;
     inset: 0 0 0 auto;
     display: grid;
     grid-template-rows: 70px 1fr 70px;
 }
-.cartTab h1{
+
+.cartTab h1 {
     padding: 20px;
     margin: 0;
-    font-weight: 300;
+    font-weight: 100px;
+    font-size: x-large;
+    height: 60px;
+  
 }
-.cartTab .btn{
+
+.cartTab .btn {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr); /* This creates two columns of equal width */
+    gap: 10px; /* Adds space between the two buttons */
+    padding: 10px; /* Adds some padding inside the button container */
+    position: absolute;
+    bottom: 0;
+    width: calc(100% - 20px); /* Adjusts the width to fit within the .cartTab, considering padding */
 }
+
+.cartTab .btn button {
+    background-image: linear-gradient(#b8ca11, #0fa809);
+    border: 0;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, .3) 0 5px 15px;
+    color: #fff;
+    cursor: pointer;
+    font-family: Montserrat,sans-serif;
+    font-size: .9em;
+    padding: 10px 15px; /* Adjust padding as needed */
+    text-align: center;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+
+
+.cartTab .btn .close{
+    background-color: white;
+}
+.cartTab .listProduct .item{
+    display: grid;
+    grid-template-columns: 70px 150px 50px 1fr;
+    gap: 10px;
+    text-align: center;
+    align-items: center;
+}
+.listProduct .quantity span{
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    background-color: white;
+    color: darkgreen;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.listProduct .quantity span:nth-child(2){
+    background-color: transparent;
+    color: #eee;
+}
+
