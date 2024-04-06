@@ -53,6 +53,37 @@ const products = {
     }
 };
 
+// close button 
+document.addEventListener('DOMContentLoaded', function() {
+    const closeButton = document.getElementById('closeID');
+    const cartTab = document.querySelector('.cartTab');
+    cartTab.style.display = 'none';
+
+    closeButton.addEventListener('click', function() {
+        // Directly modify the style to hide the cart
+        cartTab.style.display = 'none';
+    });
+
+    // Assuming you have an "Open Cart" button with id="cartToggle"
+    const openCartButton = document.getElementById('cartToggle');
+    openCartButton.addEventListener('click', function() {
+        // Directly modify the style to show the cart
+        cartTab.style.display = 'block';
+    });
+});
+
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  setTimeout(function() {
+    document.getElementById('discountPopup').classList.add('show');
+  }, 2000); // Show popup after 2 seconds for demonstration
+});
+
+function closePopup() {
+  document.getElementById('discountPopup').classList.remove('show');
+}
 function handleAddToCartClick(event, uid) {
     const itemID = event.target.getAttribute('data-itemid');
     const itemDetails = products[itemID];
@@ -122,33 +153,3 @@ async function displayCart(uid) {
 }
 
 
-// close button 
-document.addEventListener('DOMContentLoaded', function() {
-    const closeButton = document.getElementById('closeID');
-    const cartTab = document.querySelector('.cartTab');
-    cartTab.style.display = 'none';
-
-    closeButton.addEventListener('click', function() {
-        // Directly modify the style to hide the cart
-        cartTab.style.display = 'none';
-    });
-
-    // Assuming you have an "Open Cart" button with id="cartToggle"
-    const openCartButton = document.getElementById('cartToggle');
-    openCartButton.addEventListener('click', function() {
-        // Directly modify the style to show the cart
-        cartTab.style.display = 'block';
-    });
-});
-
-
-
-document.addEventListener('DOMContentLoaded', function() {
-  setTimeout(function() {
-    document.getElementById('discountPopup').classList.add('show');
-  }, 2000); // Show popup after 2 seconds for demonstration
-});
-
-function closePopup() {
-  document.getElementById('discountPopup').classList.remove('show');
-}
