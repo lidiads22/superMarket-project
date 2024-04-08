@@ -15,8 +15,37 @@
   <!-- Core theme CSS (includes Bootstrap)-->
   <link href="css/styles.css" rel="stylesheet" />
   <link href="cart.css" rel="stylesheet" />
-  <!-- Include your custom script -->
-  <!-- Include the compatibility layer for Firebase v9 SDKs -->
+
+
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore-compat.js"></script>
+    <script>
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDMWilTOAj6n_lrzlRbsroLesgG_ZtbS-8",
+            authDomain: "onlinesupermarket-7c84a.firebaseapp.com",
+            projectId: "onlinesupermarket-7c84a",
+            storageBucket: "onlinesupermarket-7c84a.appspot.com",
+            messagingSenderId: "463404516501",
+            appId: "1:463404516501:web:b38d810059e9a98c16479c",
+            measurementId: "G-31RH674TLG"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+    </script>
+    <!-- Import your client-side JavaScript files -->
+    <script src="signUp.js" defer></script>
+    <script src="cart.js" defer></script>
+</head>
+
+
 </head>
 <body>
 
@@ -46,6 +75,7 @@
           </ul>
         </li>
       </ul>
+
       <!-- Navigation and other content -->
     <div>
       <form class="d-flex">

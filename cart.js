@@ -1,6 +1,5 @@
-// cart.js
+// cart.JS
 // Object containing product details
-
 const products = {
     "broccoli_ID": {
         name: "Fresh Broccoli",
@@ -84,72 +83,90 @@ document.addEventListener('DOMContentLoaded', function() {
 function closePopup() {
   document.getElementById('discountPopup').classList.remove('show');
 }
+
+
 function handleAddToCartClick(event, uid) {
+    // Prevent the default form submission if it's within a form
+    event.preventDefault();
+
+    // Get the item ID from the clicked button's data attribute
     const itemID = event.target.getAttribute('data-itemid');
     const itemDetails = products[itemID];
-    // Correcting to use UID for Firestore document path
+
+    // Reference to the user's cart for the item
     const userCartRef = db.collection("users").doc(uid).collection("cart").doc(itemID);
 
+    // Set the item in the user's cart
     userCartRef.set(itemDetails)
-        .then(() => console.log("Item added to cart successfully"))
+        .then(() => {
+            console.log("Item added to cart successfully");
+            // After adding item to cart, update the cart display
+            displayCart(uid);
+        })
         .catch(error => console.error("Error adding item to cart: ", error));
 }
 
-// Function to display cart items
-document.addEventListener('DOMContentLoaded', function() {
-    firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-            // User is signed in, attach event listeners or perform actions
-            const uid = user.uid;
-            attachEventListeners(uid);
-        } else {
-            // User is not signed in, handle accordingly
-            console.log("No user is signed in.");
-        }
-    });
-});
+function displayCart(uid) {
+    const cartRef = db.collection("users").doc(uid).collection("cart");
+    const listCartElement = document.querySelector('.ListCart'); // Make sure this matches your container's class
+  
+    cartRef.get()
+      .then(querySnapshot => {
+        listCartElement.innerHTML = ''; // Clear any existing cart items
+        querySnapshot.forEach(doc => {
+          const item = doc.data();
+          const itemElement = document.createElement('div');
+          itemElement.classList.add('item'); // Make sure this class is styled in your CSS
+          itemElement.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <img src="${item.imageUrl}" alt="${item.name}" style="width: 70px; height: auto;">
+              <div>
+                <div>${item.name}</div>
+                <div class="price">$${item.price}</div>
+                <div>Quantity: ${item.quantity}</div>
+              </div>
+            </div>
+            <button onclick="removeItemFromCart('${doc.id}', '${uid}')">Remove</button>
+          `;
+          listCartElement.appendChild(itemElement);
+        });
+      })
+      .catch(error => console.error("Error fetching cart items: ", error));
+  }
+  
 
-function attachEventListeners(uid) {
+function attachEventListeners() {
     const addToCartButtons = document.querySelectorAll('.btn-outline-dark.mt-auto');
     addToCartButtons.forEach(button => {
         button.addEventListener('click', function(event) {
-            handleAddToCartClick(event, uid);
+            // Check if the user is signed in
+            firebase.auth().onAuthStateChanged(user => {
+                if (user) {
+                    handleAddToCartClick(event, user.uid);
+                } else {
+                    console.log("User is not signed in.");
+                }
+            });
         });
     });
 }
 
-function handleAddToCartClick(event, uid) {
-    const itemID = event.target.getAttribute('data-itemid');
-    const itemDetails = products[itemID];
-    const userCartRef = db.collection("users").doc(uid).collection("cart").doc(itemID);
+function removeItemFromCart(itemId, uid) {
+    // Reference to the user's cart for the item
+    const userCartRef = db.collection("users").doc(uid).collection("cart").doc(itemId);
 
-    userCartRef.set(itemDetails)
-        .then(() => console.log("Item added to cart successfully"))
-        .catch(error => console.error("Error adding item to cart: ", error));
-}
-
-async function displayCart(uid) {
-    const cartRef = db.collection("users").doc(uid).collection("cart");
-    const cartItemListElement = document.getElementById('cartItemsContainer'); // Ensure you have this container in your HTML
-
-    try {
-        const querySnapshot = await cartRef.get();
-        cartItemListElement.innerHTML = ''; // Clear the cart items container
-        querySnapshot.forEach((doc) => {
-            const item = doc.data();
-            const itemElement = document.createElement('div');
-            itemElement.innerHTML = `
-                <div class="cart-item">
-                    <img src="${item.imageUrl}" alt="${item.name}" style="width: 100px; height: 100px;" />
-                    <h5>${item.name}</h5>
-                    <p>$${item.price} x ${item.quantity}</p>
-                </div>
-            `;
-            cartItemListElement.appendChild(itemElement); // Append the item element to the cart items container
-        });
-    } catch (error) {
-        console.error("Error fetching cart items:", error);
-    }
+    // Delete the item from the user's cart
+    userCartRef.delete()
+        .then(() => {
+            console.log("Item removed from cart successfully");
+            // After removing item from cart, update the cart display
+            displayCart(uid);
+        })
+        .catch(error => console.error("Error removing item from cart: ", error));
 }
 
 
+// Call attachEventListeners when the DOM content is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    attachEventListeners();
+});
