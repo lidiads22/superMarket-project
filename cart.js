@@ -71,13 +71,15 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// checkout button 
-document.addEventListener('DOMContentLoaded', function(){
-    const checkoutButton = this.documentElementById('checkoutID');
-    // Redirect to orders.html to display form for checkout.
-    // Maybe a form for checkout ...
+// checkout Button
+document.addEventListener('DOMContentLoaded', function() {
+    var checkoutButton = document.getElementById('checkoutID');
+    if(checkoutButton) {
+        checkoutButton.addEventListener('click', function() {
+            window.location.href = 'orders.html'; // Replace 'orders.html' with the path to your target HTML file if different
+        });
+    }
 });
-
 
 
 
@@ -128,16 +130,17 @@ function displayCart(uid) {
                 const itemElement = document.createElement('div');
                 itemElement.classList.add('item');
                 itemElement.innerHTML = `
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <img src="${item.imageUrl}" alt="${item.name}" style="width: 70px; height: auto;">
-                        <div>
-                            <div>${item.name}</div>
-                            <div class="price">$${item.price}</div>
-                            <div>Quantity: ${item.quantity}</div>
-                        </div>
-                    </div>
-                    <button onclick="removeItemFromCart('${doc.id}', '${uid}')">Remove</button>
-                `;
+                <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <img src="${item.imageUrl}" alt="${item.name}" style="width: 70px; height: auto;">
+                  <div>
+                    <div>${item.name}</div>
+                    <div class="price">$${item.price}</div>
+                    <div>Quantity: ${item.quantity}</div>
+                  </div>
+                </div>
+                <button onclick="removeItemFromCart('${doc.id}', '${uid}')" class="remove-item-btn">Remove</button>
+              </div>`;
 
                 listCartElement.appendChild(itemElement);
 
@@ -232,3 +235,15 @@ document.addEventListener('DOMContentLoaded', function() {
  // Initial update of the total amount on page load
  updateTotalDisplay();
 
+// debug undefined 
+function addToCart(item) {
+    // Assuming 'cart' is an array holding your cart items
+    if (!item || item.price === undefined || item.quantity === undefined) {
+      console.error('Item is undefined or missing price/quantity', item);
+      return;
+    }
+    cart.push(item);
+    updateCartDisplay(); // Function to update the cart display
+  }
+
+  

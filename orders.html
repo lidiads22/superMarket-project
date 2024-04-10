@@ -1,26 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Order Details</title>
-<style>
-  body { font-family: Arial, sans-serif; }
-  #orderDetails { display: none; border: 1px solid #ccc; padding: 20px; margin-top: 20px; }
-  button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
-</style>
-</head>
-<body>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <!-- Favicon-->
+      <link rel="icon" type="image/x-icon" href="assets/46271.jpg" />
+      <!-- Bootstrap icons-->
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    
+      <!-- Core theme CSS (includes Bootstrap)-->
+      <link href="css/styles.css" rel="stylesheet" />
+      <link href="cart.css" rel="stylesheet" />
+      <link href="orders.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+    
+        <!-- Firebase SDKs -->
+        <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-auth-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore-compat.js"></script>
+        <script>
+            // Your web app's Firebase configuration
+            const firebaseConfig = {
+                apiKey: "AIzaSyDMWilTOAj6n_lrzlRbsroLesgG_ZtbS-8",
+                authDomain: "onlinesupermarket-7c84a.firebaseapp.com",
+                projectId: "onlinesupermarket-7c84a",
+                storageBucket: "onlinesupermarket-7c84a.appspot.com",
+                messagingSenderId: "463404516501",
+                appId: "1:463404516501:web:b38d810059e9a98c16479c",
+                measurementId: "G-31RH674TLG"
+            };
+    
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+            const db = firebase.firestore();
+        </script>
+        <!-- Import your client-side JavaScript files -->
+        <script src="signUp.js" defer></script>
+        <script src="cart.js" defer></script>
+    </head>
+    </head>
 
-<h2>Your Cart</h2>
-<!-- Checkout Button -->
-<button id="checkoutButton">Checkout</button>s
+    <a href="home.html" id="backToShopping" class="back-to-shopping">
+        &#8592; Back to shopping
+      </a>
+      
+<body    
 
-<script>
-document.getElementById("checkoutButton").onclick = function() {
-  document.getElementById("orderDetails").style.display = 'block';
-};
-</script>
+<form class="shipping-form">
+    <h2>Shipping Address</h2>
+  
+    <div class="form-group">
+      <label for="full-name">Full name</label>
+      <input type="text" id="full-name" name="full-name" placeholder="Full name">
+    </div>
+  
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="email@gmail.com">
+    </div>
+
+    <div class="form-group">
+        <label for="address">Address</label>
+        <input type="address" id="address" name="address" placeholder="1234 Main St, Apt 101">
+      </div>
+  
+      <div class="form-group">
+        <label for="phone">Phone</label>
+        <input type="phone" id="phone" name="phone" placeholder="+1 (555) 123-4567">
+      </div>
+  
+    <button type="submit" class="submit-btn">Submit</button>
+  </form>
 
 </body>
 </html>
