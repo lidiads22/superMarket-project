@@ -71,6 +71,14 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// checkout button 
+document.addEventListener('DOMContentLoaded', function(){
+    const checkoutButton = this.documentElementById('checkoutID');
+    // Redirect to orders.html to display form for checkout.
+    // Maybe a form for checkout ...
+});
+
+
 
 
 
@@ -108,47 +116,54 @@ function handleAddToCartClick(event, uid) {
 
 function displayCart(uid) {
     const cartRef = db.collection("users").doc(uid).collection("cart");
-    const listCartElement = document.querySelector('.ListCart'); // Make sure this matches your container's class
-  
+    const listCartElement = document.querySelector('.ListCart');
+
     cartRef.get()
-      .then(querySnapshot => {
-        listCartElement.innerHTML = ''; // Clear any existing cart items
-        let totalPrice = 0; // Initialize total price
-        
-        querySnapshot.forEach(doc => {
-          const item = doc.data();
-          const itemElement = document.createElement('div');
-          itemElement.classList.add('item'); // Ensure this class is styled in your CSS
-          itemElement.innerHTML = `
-            <div style="display: flex; align-items: center; gap: 10px;">
-              <img src="${item.imageUrl}" alt="${item.name}" style="width: 70px; height: auto;">
-              <div>
-                <div>${item.name}</div>
-                <div class="price">$${item.price}</div>
-                <div>Quantity: ${item.quantity}</div>
-              </div>
-            </div>
-            <button onclick="removeItemFromCart('${doc.id}', '${uid}')">Remove</button>
-          `;
-  
-          listCartElement.appendChild(itemElement);
-  
-          // Update total price
-          totalPrice += item.price * item.quantity;
-        });
-  
-        // Check if there are items in the cart to display the total
-        if(querySnapshot.size > 0) {
-          const totalElement = document.createElement('div');
-          totalElement.classList.add('total'); // Ensure this class is styled in your CSS
-          totalElement.innerHTML = `<strong>Total: $${totalPrice.toFixed(2)}</strong>`; // Display total with 2 decimal places
-          listCartElement.appendChild(totalElement);
-        }
-      })
-      .catch(error => console.error("Error fetching cart items: ", error));
-  }
-  
-  
+        .then(querySnapshot => {
+            listCartElement.innerHTML = ''; // Clear any existing cart items
+            let subtotal = 0; // Initialize subtotal price
+
+            querySnapshot.forEach(doc => {
+                const item = doc.data();
+                const itemElement = document.createElement('div');
+                itemElement.classList.add('item');
+                itemElement.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <img src="${item.imageUrl}" alt="${item.name}" style="width: 70px; height: auto;">
+                        <div>
+                            <div>${item.name}</div>
+                            <div class="price">$${item.price}</div>
+                            <div>Quantity: ${item.quantity}</div>
+                        </div>
+                    </div>
+                    <button onclick="removeItemFromCart('${doc.id}', '${uid}')">Remove</button>
+                `;
+
+                listCartElement.appendChild(itemElement);
+
+                // Update subtotal price considering the quantity of each item
+                subtotal += item.price * item.quantity;
+            });
+
+            // Calculate taxes based on the subtotal
+            const taxRate = 0.0825; // 8.25% tax rate
+            const taxAmount = subtotal * taxRate;
+            const total = subtotal + taxAmount; // Total amount after adding taxes
+
+            // Check if there are items in the cart to display the total
+            if (querySnapshot.size > 0) {
+                const totalElement = document.createElement('div');
+                totalElement.classList.add('total');
+                totalElement.innerHTML = `
+                    <strong>Subtotal: $${subtotal.toFixed(2)}</strong><br>
+                    <strong>Tax (8.25%): $${taxAmount.toFixed(2)}</strong><br>
+                    <strong>Total: $${total.toFixed(2)}</strong>
+                `; // Display subtotal, tax, and total with 2 decimal places
+                listCartElement.appendChild(totalElement);
+            }
+        })
+        .catch(error => console.error("Error fetching cart items: ", error));
+}
 
 function attachEventListeners() {
     const addToCartButtons = document.querySelectorAll('.btn-outline-dark.mt-auto');
