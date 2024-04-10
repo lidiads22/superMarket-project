@@ -181,3 +181,24 @@
     opacity: 1;
   }
   
+
+  /* discount */
+  .discount-code-container {
+    margin: 20px 0;
+    text-align: center;
+  }
+  
+  .discount-input {
+    padding: 10px;
+    margin-right: 5px;
+    font-size: 14px;
+  }
+  
+  .apply-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    background-color: #4CAF50; /* or any color that fits your design */
+    color: white;
+    border: none;
+    cursor: pointer;
+  }

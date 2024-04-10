@@ -113,10 +113,12 @@ function displayCart(uid) {
     cartRef.get()
       .then(querySnapshot => {
         listCartElement.innerHTML = ''; // Clear any existing cart items
+        let totalPrice = 0; // Initialize total price
+        
         querySnapshot.forEach(doc => {
           const item = doc.data();
           const itemElement = document.createElement('div');
-          itemElement.classList.add('item'); // Make sure this class is styled in your CSS
+          itemElement.classList.add('item'); // Ensure this class is styled in your CSS
           itemElement.innerHTML = `
             <div style="display: flex; align-items: center; gap: 10px;">
               <img src="${item.imageUrl}" alt="${item.name}" style="width: 70px; height: auto;">
@@ -128,11 +130,24 @@ function displayCart(uid) {
             </div>
             <button onclick="removeItemFromCart('${doc.id}', '${uid}')">Remove</button>
           `;
+  
           listCartElement.appendChild(itemElement);
+  
+          // Update total price
+          totalPrice += item.price * item.quantity;
         });
+  
+        // Check if there are items in the cart to display the total
+        if(querySnapshot.size > 0) {
+          const totalElement = document.createElement('div');
+          totalElement.classList.add('total'); // Ensure this class is styled in your CSS
+          totalElement.innerHTML = `<strong>Total: $${totalPrice.toFixed(2)}</strong>`; // Display total with 2 decimal places
+          listCartElement.appendChild(totalElement);
+        }
       })
       .catch(error => console.error("Error fetching cart items: ", error));
   }
+  
   
 
 function attachEventListeners() {
@@ -170,3 +185,35 @@ function removeItemFromCart(itemId, uid) {
 document.addEventListener('DOMContentLoaded', function() {
     attachEventListeners();
 });
+
+ // Placeholder data for total amount and discount
+ let totalAmount = 100.00; // Example initial total amount
+ let discountPercentage = 10; // Example discount of 10%
+
+ // Function to update the total amount displayed
+ function updateTotalDisplay() {
+   document.getElementById('totalAmount').textContent = '$' + totalAmount.toFixed(2);
+ }
+
+ // Function to apply the discount code
+ function applyDiscount() {
+   let discountCode = document.getElementById('discountCode').value;
+
+   // Placeholder for discount code validation and application logic
+   // In a real application, validate the discount code on the server side
+   console.log("The entered discount code is:", discountCode);
+   // For the sake of example, we apply a discount if any code is entered
+   if(discountCode.trim() !== '') {
+     totalAmount -= totalAmount * (discountPercentage / 100);
+   }
+
+   // Update the total amount displayed after discount
+   updateTotalDisplay();
+   
+   // Alert the user - for real application, replace with a user-friendly message in the DOM
+   alert("Discount code applied: " + discountCode);
+ }
+
+ // Initial update of the total amount on page load
+ updateTotalDisplay();
+

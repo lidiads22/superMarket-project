@@ -332,6 +332,24 @@
       <button class="close" id="closeID">CLOSE</button>
       <button class="checkout" id="checkoutID" >CHECK OUT</button>
   </div>
+   <!-- Discount Code Section -->
+   <div class="discount-code-container">
+    <input type="text" id="discountCode" class="discount-input" placeholder="Enter discount code">
+    <button class="apply-btn" onclick="applyDiscount()">Apply</button>
+  </div>
+  <script>
+    function applyDiscount() {
+      // JavaScript to process the discount code
+      var discountCode = document.getElementById('discountCode').value;
+      // Process the discount code
+      // You might want to validate the discount code and recalculate the total amount
+      console.log("The entered discount code is:", discountCode);
+      
+      // For example, you could alert the user (but in a real application you might update the price displayed)
+      alert("Discount code applied: " + discountCode);
+    }
+  </script>
+  
 </div>
 
 <style>

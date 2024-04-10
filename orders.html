@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order Details</title>
+<style>
+  body { font-family: Arial, sans-serif; }
+  #orderDetails { display: none; border: 1px solid #ccc; padding: 20px; margin-top: 20px; }
+  button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+</style>
+</head>
+<body>
+
+<h2>Your Cart</h2>
+<!-- Checkout Button -->
+<button id="checkoutButton">Checkout</button>s
+
+<script>
+document.getElementById("checkoutButton").onclick = function() {
+  document.getElementById("orderDetails").style.display = 'block';
+};
+</script>
+
+</body>
+</html>
