@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Online super market</title>
+    <title>Online Super Market - Login</title>
 
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/46271.jpg" />
@@ -13,6 +13,40 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/styles.css" rel="stylesheet" />
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore-compat.js"></script>
+
+
+    <script>
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDMWilTOAj6n_lrzlRbsroLesgG_ZtbS-8",
+            authDomain: "onlinesupermarket-7c84a.firebaseapp.com",
+            projectId: "onlinesupermarket-7c84a",
+            storageBucket: "onlinesupermarket-7c84a.appspot.com",
+            messagingSenderId: "463404516501",
+            appId: "1:463404516501:web:b38d810059e9a98c16479c",
+            measurementId: "G-31RH674TLG"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+    </script>
+
+    <!-- Import your client-side JavaScript files -->
+    <script type="text/javascript" src="signUp.js" defer></script>
+    <script type="text/javascript" src="cart.js" defer></script>
+    <script type="text/javascript" src="login.js" defer></script>
+    <!-- JavaScript files or links here -->
+    <script type="text/javascript" src="login.js"></script>
+
+
+
+
 </head>
 <body>
 
@@ -64,15 +98,17 @@
                 <div class="card-body">
 
                     <!-- Add your login form here -->
-                    <form action=''>
-                        <div class="mb-3">
-                            <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="username" name="username" required>
-                        </div>
+                    <form id="login-form" action='' >
+                        <!--   <div id="not-logged-in"> -->
 
                         <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" placeholder="Email" class="form-control" id="email" name="username" required>
+                        </div>
+                        <!-- Add other form fields as needed -->
+                        <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" name="password" required>
+                            <input type="password" placeholder="Password" class="form-control" id="password" name="password" required>
                         </div>
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary">Login</button>
@@ -82,6 +118,15 @@
                             <p>Don't have an account? <a href="signUp.html">Sign Up</a></p>
                         </div>
 
+                        <!-- </div> -->
+
+
+                        <!--                        <div id="logged-in">-->
+                        <!--                            <h3>You are logged in now</h3>-->
+                        <!--                            <button onclick="logout()">Logout</button>-->
+                        <!--                        </div>-->
+
+
                     </form>
                 </div>
             </div>
@@ -89,6 +134,5 @@
     </div>
 </div>
 
-<!-- JavaScript files or links here -->
 </body>
 </html>
