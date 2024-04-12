@@ -12,6 +12,11 @@
     text-align: left;
     margin-bottom: 20px;
   }
+
+  .payment-text h1{
+    text-align: left;
+    margin-bottom: 6px;
+  }
   
   .form-group {
     margin-bottom: 15px;
@@ -26,6 +31,7 @@
   .form-group input[type="email"],
   .form-group input[type="phone"],
   .form-group input[type="address"],
+  .form-group input[type="cardNumber"],
   .form-group select {
     width: 100%;
     padding: 15px;

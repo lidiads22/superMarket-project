@@ -35,6 +35,31 @@
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
+
+
+        // Set auth persistence
+auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
+  .then(() => {
+    // Handle successful setting of the persistence
+    console.log("Persistence set to session.");
+    // Attempt to sign in or handle authenticated sessions here
+  })
+  .catch((error) => {
+    // Handle errors here
+    console.error("Error setting persistence:", error);
+  });
+
+  // Listen for authentication state changes
+firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+        console.log("User is logged in with uid:", user.uid);
+        // Redirect or perform other actions as needed
+    } else {
+        console.log("No user is logged in.");
+        // Optionally redirect to login page
+        window.location.href = 'login.html';
+    }
+});
     </script>
 
     <!-- Import your client-side JavaScript files -->
@@ -43,7 +68,7 @@
     <script type="text/javascript" src="login.js" defer></script>
     <!-- JavaScript files or links here -->
     <script type="text/javascript" src="login.js"></script>
-
+    <script src="orders.js" defer></script>
 
 
 
@@ -117,15 +142,6 @@
                         <div class="mt-3 text-center">
                             <p>Don't have an account? <a href="signUp.html">Sign Up</a></p>
                         </div>
-
-                        <!-- </div> -->
-
-
-                        <!--                        <div id="logged-in">-->
-                        <!--                            <h3>You are logged in now</h3>-->
-                        <!--                            <button onclick="logout()">Logout</button>-->
-                        <!--                        </div>-->
-
 
                     </form>
                 </div>

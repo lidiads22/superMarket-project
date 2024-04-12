@@ -34,13 +34,42 @@
             measurementId: "G-31RH674TLG"
         };
 
+
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
+        const auth = firebase.auth();
+
+        // Set auth persistence
+auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
+  .then(() => {
+    // Handle successful setting of the persistence
+    console.log("Persistence set to session.");
+    // Attempt to sign in or handle authenticated sessions here
+  })
+  .catch((error) => {
+    // Handle errors here
+    console.error("Error setting persistence:", error);
+  });
+
+
+// Listen for authentication state changes
+firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+        console.log("User is logged in with uid:", user.uid);
+        // Redirect or perform other actions as needed
+    } else {
+        console.log("No user is logged in.");
+        // Optionally redirect to login page
+        window.location.href = 'login.html';
+    }
+});
+
     </script>
     <!-- Import your client-side JavaScript files -->
     <script src="signUp.js" defer></script>
     <script src="cart.js" defer></script>
+    <script src="orders.js" defer></script>
 </head>
 
 
@@ -327,6 +356,7 @@
 </div>
 
 <div class="btn">
+
       <button class="close" id="closeID">CLOSE</button>
       <button class="checkout" id="checkoutID" >CHECK OUT</button>
   </div>

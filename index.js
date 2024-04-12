@@ -40,6 +40,11 @@ app.get('/cart.html', (req, res) => {
     res.sendFile(path.join(__dirname, 'cart.html'));
 });
 
+// Serve cart.html
+app.get('/orders.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'orderss.html'));
+});
+
 // Serve static files from the "assets" folder for pictures
 app.use('/assets', express.static('assets'));
 

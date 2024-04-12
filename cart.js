@@ -210,8 +210,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
  // Function to update the total amount displayed
  function updateTotalDisplay() {
-   document.getElementById('totalAmount').textContent = '$' + totalAmount.toFixed(2);
- }
+    const totalAmountElement = document.getElementById('totalAmount');
+    if (totalAmountElement) {
+        totalAmountElement.textContent = '$' + totalAmount.toFixed(2);
+    } else {
+        console.warn('totalAmount element not found. Skipping update.');
+    }
+}
+  
 
  // Function to apply the discount code
  function applyDiscount() {

@@ -1,79 +1,103 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <!-- Favicon-->
-      <link rel="icon" type="image/x-icon" href="assets/46271.jpg" />
-      <!-- Bootstrap icons-->
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
-    
-      <!-- Core theme CSS (includes Bootstrap)-->
-      <link href="css/styles.css" rel="stylesheet" />
-      <link href="cart.css" rel="stylesheet" />
-      <link href="orders.css" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
-    
-        <!-- Firebase SDKs -->
-        <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-auth-compat.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore-compat.js"></script>
-        <script>
-            // Your web app's Firebase configuration
-            const firebaseConfig = {
-                apiKey: "AIzaSyDMWilTOAj6n_lrzlRbsroLesgG_ZtbS-8",
-                authDomain: "onlinesupermarket-7c84a.firebaseapp.com",
-                projectId: "onlinesupermarket-7c84a",
-                storageBucket: "onlinesupermarket-7c84a.appspot.com",
-                messagingSenderId: "463404516501",
-                appId: "1:463404516501:web:b38d810059e9a98c16479c",
-                measurementId: "G-31RH674TLG"
-            };
-    
-            // Initialize Firebase
-            firebase.initializeApp(firebaseConfig);
-            const db = firebase.firestore();
-        </script>
-        <!-- Import your client-side JavaScript files -->
-        <script src="signUp.js" defer></script>
-        <script src="cart.js" defer></script>
-    </head>
-    </head>
-
-    <a href="home.html" id="backToShopping" class="back-to-shopping">
-        &#8592; Back to shopping
-      </a>
-      
-<body    
-
-<form class="shipping-form">
-    <h2>Shipping Address</h2>
+  <!-- Favicon-->
+  <link rel="icon" type="image/x-icon" href="assets/46271.jpg" />
+  <!-- Bootstrap icons-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
   
+  <!-- Core theme CSS (includes Bootstrap)-->
+  <link href="css/styles.css" rel="stylesheet" />
+  <link href="cart.css" rel="stylesheet" />
+  <link href="orders.css" rel="stylesheet" />
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore-compat.js"></script>
+  <script>
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDMWilTOAj6n_lrzlRbsroLesgG_ZtbS-8",
+      authDomain: "onlinesupermarket-7c84a.firebaseapp.com",
+      projectId: "onlinesupermarket-7c84a",
+      storageBucket: "onlinesupermarket-7c84a.appspot.com",
+      messagingSenderId: "463404516501",
+      appId: "1:463404516501:web:b38d810059e9a98c16479c",
+      measurementId: "G-31RH674TLG"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    const auth = firebase.auth();
+
+
+    // Set auth persistence
+auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
+  .then(() => {
+    // Handle successful setting of the persistence
+    console.log("Persistence set to session.");
+    // Attempt to sign in or handle authenticated sessions here
+  })
+  .catch((error) => {
+    // Handle errors here
+    console.error("Error setting persistence:", error);
+  });
+
+
+  // Listen for authentication state changes
+firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+        console.log("User is logged in with uid:", user.uid);
+        // Redirect or perform other actions as needed
+    } else {
+        console.log("No user is logged in.");
+        // Optionally redirect to login page
+        window.location.href = 'login.html';
+    }
+});
+
+
+  </script>
+</head>
+<body>
+  <a href="home.html" id="backToShopping" class="back-to-shopping">
+    &#8592; Back to shopping
+  </a>
+
+  <form class="shipping-form">
+    <h2>Shipping Address</h2>
     <div class="form-group">
       <label for="full-name">Full name</label>
       <input type="text" id="full-name" name="full-name" placeholder="Full name">
     </div>
-  
     <div class="form-group">
       <label for="email">Email</label>
       <input type="email" id="email" name="email" placeholder="email@gmail.com">
     </div>
-
     <div class="form-group">
-        <label for="address">Address</label>
-        <input type="address" id="address" name="address" placeholder="1234 Main St, Apt 101">
-      </div>
-  
-      <div class="form-group">
-        <label for="phone">Phone</label>
-        <input type="phone" id="phone" name="phone" placeholder="+1 (555) 123-4567">
-      </div>
-  
+      <label for="address">Address</label>
+      <input type="text" id="address" name="address" placeholder="1234 Main St, Apt 101">
+    </div>
+    <div class="form-group">
+      <label for="phone">Phone</label>
+      <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567">
+    </div>
+    <div class="payment-text">
+      <h3>Payment Method</h3>
+    </div>
+    <div class="form-group">
+      <label for="cardNumber">Card Number</label>
+      <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456" pattern="\d{4} \d{4} \d{4} \d{4}" required>
+    </div>
     <button type="submit" class="submit-btn">Submit</button>
   </form>
 
+  <!-- Import your client-side JavaScript files -->
+  <script src="signUp.js" defer></script>
+  <script src="cart.js" defer></script>
+  <script src="orders.js" defer></script>
+  <script src="login.js" defer></script>
 </body>
 </html>
