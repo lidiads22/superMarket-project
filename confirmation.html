@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            padding: 10px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #f9f9f9;
+            padding: 20px;
+            text-align: center;
+        }
+        h2 {
+            color: #333;
+        }
+        .order-details {
+            text-align: left;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-top: 20px;
+        }
+        .order-details span {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<script src="confirmation.js" defer></script>
+<body>
+    <div class="container">
+        <h2>Order Confirmation</h2>
+        <p>Thank you for your order! Below are the details of your order:</p>
+        
+       <!-- Confirmation Page HTML -->
+<div class="order-details">
+    <p><span>Full Name:</span> <span id="confirm-fullName"></span></p>
+    <p><span>Email:</span> <span id="confirm-email"></span></p>
+    <p><span>Address:</span> <span id="confirm-address"></span></p>
+    <p><span>Phone:</span> <span id="confirm-phone"></span></p>
+  </div>
+  
+        
+        <!-- Insert any additional order information here -->
+        
+        <p>If you have any questions about your order, please contact us at <a href="mailto:support@example.com">support@example.com</a>.</p>
+    </div>
+
+    </script>
+    <script src="signUp.js" defer></script>
+    <script src="cart.js" defer></script>
+    <script src="orders.js" defer></script>
+    <script src="login.js" defer></script>
+    <script src="confirmation.js" defer></script>
+</body>
+</html>
