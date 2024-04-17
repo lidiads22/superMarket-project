@@ -91,7 +91,7 @@ firebase.auth().onAuthStateChanged(function(user) {
       <label for="cardNumber">Card Number</label>
       <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456" pattern="\d{4} \d{4} \d{4} \d{4}" required>
     </div>
-    <button type="submit" class="submit-btn">Submit</button>
+    <button type="submit" class="submit-btn" onclick="displayOrder()">Submit</button>
   </form>
 
   <!-- Import your client-side JavaScript files -->
@@ -99,5 +99,6 @@ firebase.auth().onAuthStateChanged(function(user) {
   <script src="cart.js" defer></script>
   <script src="orders.js" defer></script>
   <script src="login.js" defer></script>
+  <script src="admin.js" defer></script>
 </body>
 </html>

@@ -10,7 +10,7 @@ function displayConfirmationDetails() {
         document.getElementById('confirm-email').textContent = storedData.email;
         document.getElementById('confirm-address').textContent = storedData.address;
         document.getElementById('confirm-phone').textContent = storedData.phone;
-
+        document.getElementById('totalAmount').textContent = '$' + totalAmount.toFixed(2);
         // Clear the stored data if it's no longer needed
         localStorage.removeItem('shippingData');
     } else {

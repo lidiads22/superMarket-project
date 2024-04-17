@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="description" content="" />
   <meta name="author" content="" />
-  <title>Online super market</title>
+  <title>Online Super Market</title>
   <!-- Favicon-->
   <link rel="icon" type="image/x-icon" href="assets/46271.jpg" />
   <!-- Bootstrap icons-->
@@ -61,7 +61,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     } else {
         console.log("No user is logged in.");
         // Optionally redirect to login page
-        window.location.href = 'login.html';
+        window.location.href = 'index.html';
     }
 });
 
@@ -144,8 +144,19 @@ firebase.auth().onAuthStateChanged(function(user) {
             <div class="text-center">
               <!-- Product name-->
               <h5 class="fw-bolder">Fresh Broccoli</h5>
+                <!-- Product reviews-->
+                <div class="d-flex justify-content-center small text-warning mb-2">
+                    <div class="bi-star-fill"></div>
+                    <div class="bi-star-fill"></div>
+                    <div class="bi-star-fill"></div>
+                    <div class="bi-star-fill"></div>
+                </div>
               <!-- Product price-->
               $2.50 per lb
+
+            </div>
+            <div class="text-center">
+            Quantity:
             </div>
           </div>
           <!-- Product actions-->
@@ -179,6 +190,9 @@ firebase.auth().onAuthStateChanged(function(user) {
               <!-- Product price-->
               $1.50 per lb
             </div>
+            <div class="text-center">
+              Quantity:
+            </div>
           </div>
           <!-- Product actions-->
           <div class="card-footer p-4 pt-0 border-top-0 bg-transparent text-center" >
@@ -200,8 +214,18 @@ firebase.auth().onAuthStateChanged(function(user) {
             <div class="text-center">
               <!-- Product name-->
               <h5 class="fw-bolder">Potatoes</h5>
+                <!-- Product reviews-->
+                <div class="d-flex justify-content-center small text-warning mb-2">
+                    <div class="bi-star-fill"></div>
+                    <div class="bi-star-fill"></div>
+                    <div class="bi-star-fill"></div>
+                    <div class="bi-star-fill"></div>
+                </div>
               <!-- Product price-->
               $1.50 per lb
+            </div>
+            <div class="text-center">
+              Quantity:
             </div>
           </div>
           <!-- Product actions-->
@@ -232,6 +256,9 @@ firebase.auth().onAuthStateChanged(function(user) {
               <!-- Product price-->
               $2.50 per lb
             </div>
+            <div class="text-center">
+              Quantity:
+            </div>
           </div>
           <!-- Product actions-->
           <div class="card-footer p-4 pt-0 border-top-0 bg-transparent text-center" >
@@ -252,8 +279,18 @@ firebase.auth().onAuthStateChanged(function(user) {
             <div class="text-center">
               <!-- Product name-->
               <h5 class="fw-bolder">Organic Strawberries</h5>
+                <!-- Product reviews-->
+                <div class="d-flex justify-content-center small text-warning mb-2">
+                    <div class="bi-star-fill"></div>
+                    <div class="bi-star-fill"></div>
+                    <div class="bi-star-fill"></div>
+                    <div class="bi-star-fill"></div>
+                </div>
               <!-- Product price-->
-              $3.50
+              $3.50 per lb
+            </div>
+            <div class="text-center">
+              Quantity:
             </div>
           </div>
           <!-- Product actions-->
@@ -275,8 +312,18 @@ firebase.auth().onAuthStateChanged(function(user) {
             <div class="text-center">
               <!-- Product name-->
               <h5 class="fw-bolder">Organic Bananas</h5>
+                <!-- Product reviews-->
+                <div class="d-flex justify-content-center small text-warning mb-2">
+                    <div class="bi-star-fill"></div>
+                    <div class="bi-star-fill"></div>
+                    <div class="bi-star-fill"></div>
+                    <div class="bi-star-fill"></div>
+                </div>
               <!-- Product price-->
               $2.50 per lb
+            </div>
+            <div class="text-center">
+              Quantity:
             </div>
           </div>
           <!-- Product actions-->
@@ -309,6 +356,9 @@ firebase.auth().onAuthStateChanged(function(user) {
               <!-- Product price-->
               $2.50 per lb
             </div>
+            <div class="text-center">
+              Quantity:
+            </div>
           </div>
           <!-- Product actions-->
           <div class="card-footer p-4 pt-0 border-top-0 bg-transparent text-center" >
@@ -337,6 +387,9 @@ firebase.auth().onAuthStateChanged(function(user) {
               </div>
               <!-- Product price-->
               $1.50 per lb
+            </div>
+            <div class="text-center">
+              Quantity:
             </div>
           </div>
           <!-- Product actions-->

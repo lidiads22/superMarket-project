@@ -1,19 +1,30 @@
 <!doctype html>
 <html lang="en">
+<style>
+    .btn-add{
+        background-color: rgb(237, 245, 238);
+        color: green;
+        padding: 5px 10px;
+        border-radius: 20px;
+        margin-top: 10px;
+        border: solid;
+        cursor: pointer;
+    }
+</style>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin</title>
+    <title>Products</title>
 
     <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="assets/46271.jpg" />
+    <link rel="icon" type="image/x-icon" href="../assets/46271.jpg" />
     <!-- Bootstrap icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="css/styles.css" rel="stylesheet" />
+    <link href="../css/styles.css" rel="stylesheet" />
 
 
     <!-- Firebase SDKs -->
@@ -42,35 +53,33 @@
 
 
     <!-- Import your client-side JavaScript files -->
-    <script type="text/javascript" src="signUp.js" defer></script>
-    <script type="text/javascript" src="cart.js" defer></script>
-    <script type="text/javascript" src="login.js" defer></script>
+    <script type="text/javascript" src="../signUp.js" defer></script>
+    <script type="text/javascript" src="../cart.js" defer></script>
+    <script type="text/javascript" src="../login.js" defer></script>
     <!-- JavaScript files or links here -->
-    <script type="text/javascript" src="login.js"></script>
-    <script src="orders.js" defer></script>
-    <script type="text/javascript" src="admin.js" defer></script>
+    <script type="text/javascript" src="../login.js"></script>
+    <script src="../orders.js" defer></script>
 
 </head>
 
 <body>
 
 <!-- Navigation-->
-<link href="css/colorUpdates.css" rel="stylesheet" />
+<link href="../css/colorUpdates.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat&display=swap">
 <nav class="navbar navbar-expand-lg navbar-light grocery-nav custom-font-nav">
     <div class="container px-4 px-lg-5">
         <!-- Adding a small logo next to the supermarket name -->
         <a class="navbar-brand supermarket-title" href="#!">
-            <img src="assets/img.png" alt="Super Market Logo" class="logo-img">
+            <img src="../assets/img.png" alt="Super Market Logo" class="logo-img">
             Super Market Admin
         </a>
-
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                <li class="nav-item"><a class="nav-link active" aria-current="page" href="home.html">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="index.html">Logout</a></li>
-                </ul>
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="../home.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="../index.html">Logout</a></li>
+            </ul>
         </div>
     </div>
 </nav>
@@ -94,31 +103,31 @@
             <div class="sidebar-sticky">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link active" href="admin.html">
+                        <a class="nav-link active" href="#">
                             <span data-feather="home"></span>
                             Dashboard <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./admin/orders.html">
+                        <a class="nav-link" href="orders.html">
                             <span data-feather="file"></span>
                             Orders
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./admin/products.html">
+                        <a class="nav-link" href="products.html">
                             <span data-feather="shopping-cart"></span>
                             Products
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./admin/users.html">
+                        <a class="nav-link" href="#">
                             <span data-feather="users"></span>
                             Users
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./admin/discount.html">
+                        <a class="nav-link" href="#">
                             <span data-feather="bar-chart-2"></span>
                             Discount Codes
                         </a>
@@ -130,49 +139,31 @@
         </nav>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-                <h1 class="h2">Dashboard</h1>
-                <div class="btn-toolbar mb-2 mb-md-0">
-
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6"></div>
+                    <div class="col-md-6">
+                        <div class="mb-6">
+                            <h1 class="h2">Product Search</h1>
+                            <label for="formGroupExampleInput" class="form-label">Product ID</label>
+                            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="example: 'Broccoli_ID'">
+                        </div>
+                        <div class="mb-6">
+                            <label for="formGroupExampleInput2" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="example: 'Fresh Broccoli'">
+                        </div>
+                        <div class="mb-6">
+                            <label for="formGroupExampleInput2" class="form-label">Price</label>
+                            <input type="text" class="form-control" id="formGroupExampleInput3" placeholder="example: '2.5'">
+                        </div>
+                        <div class="mb-6">
+                            <label for="formGroupExampleInput2" class="form-label">Quantity</label>
+                            <input type="text" class="form-control" id="formGroupExampleInput4" placeholder="example: '2'">
+                        </div>
+                        <button class="btn-add">Add</button>
+                    </div>
                 </div>
             </div>
-
-            <canvas class="my-4" id="myChart" width="900" height="380"></canvas>
-
-            <h2>Orders</h2>
-            <div class="ListOrder">
-            </div>
-<!--            <div class="table-responsive">-->
-<!--                <table class="table table-striped table-sm">-->
-<!--                    <thead>-->
-<!--                    <tr>-->
-<!--                        <th>Order ID</th>-->
-<!--                        <th>Time</th>-->
-<!--                        <th>Full Name</th>-->
-<!--                        <th>Phone #</th>-->
-<!--                        <th>Email</th>-->
-<!--                        <th>Address</th>-->
-<!--                        <th>Card #</th>-->
-<!--                    </tr>-->
-<!--                    </thead>-->
-
-<!--                    <tbody>-->
-
-<!--                    <tr>-->
-
-<!--                        <td>1,001</td>-->
-<!--                        <td>Lorem</td>-->
-<!--                        <td>ipsum</td>-->
-<!--                        <td>dolor</td>-->
-<!--                        <td>sit</td>-->
-<!--                        <td>sit</td>-->
-<!--                        <td>sit</td>-->
-<!--                    </tr>-->
-
-
-<!--                    </tbody>-->
-<!--                </table>-->
-<!--            </div>-->
         </main>
     </div>
 </div>
@@ -200,7 +191,7 @@
         data: {
             labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
             datasets: [{
-                data: [1, 2, 3, 4, 5, 6],
+                data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
                 lineTension: 0,
                 backgroundColor: 'transparent',
                 borderColor: '#007bff',
@@ -222,12 +213,5 @@
         }
     });
 </script>
-
-<script src="signUp.js" defer></script>
-<script src="cart.js" defer></script>
-<script src="orders.js" defer></script>
-<script src="login.js" defer></script>
-<script src="confirmation.js" defer></script>
-<script src="admin.js" defer></script>
 </body>
 </html>
